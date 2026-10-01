@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE suite SYSTEM "https://testng.org/testng-1.0.dtd">
+<suite name="SauceDemo Automated Test Suite" verbose="1">
+    <listeners>
+        <listener class-name="utils.TestListener"/>
+    </listeners>
+    <test name="SauceDemo Regression Tests">
+        <classes>
+            <class name="TC01_ValidLoginTest"/>
+            <class name="TC02_InvalidLoginScenariosTest"/>
+            <class name="TC03_InventoryProductsTest"/>
+            <class name="TC04_ProductSortingTest"/>
+            <class name="TC05_CartBadgeTest"/>
+            <class name="TC06_ProductDetailsTest"/>
+            <class name="TC07_CartPageTest"/>
+            <class name="TC08_CheckoutFormValidationTest"/>
+            <class name="TC09_CheckoutCompleteFlowTest"/>
+            <class name="TC010_LogoutTest"/>
+            <class name="TC11_completeOrderFlow"/>
+            <class name="TC12_ProductSortingValidation"/>
+            <class name="TC13_CartRemovalAndBadgeUpdation"/>
+        </classes>
+    </test>
+
+</suite>
