@@ -4,6 +4,8 @@
     <listeners>
         <listener class-name="utils.TestListener"/>
     </listeners>
+    <parameter name="browser" value="chrome"/>
+
     <test name="SauceDemo Regression Tests">
         <classes>
             <class name="TC01_ValidLoginTest"/>

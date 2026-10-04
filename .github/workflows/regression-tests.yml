@@ -1,4 +1,4 @@
-name: SauceDemo Automated Regression Suite
+name: SauceDemo Cross-Browser Automated Suite
 
 on:
   push:
@@ -6,14 +6,16 @@ on:
   pull_request:
     branches: [ main, master ]
   schedule:
-    # Runs every day at 08:00 UTC (1:30 PM IST)
     - cron: '0 8 * * *'
-  # Allows manual triggering from GitHub UI
   workflow_dispatch:
 
 jobs:
   test:
     runs-on: ubuntu-latest
+    strategy:
+      fail-fast: false
+      matrix:
+        browser: [chrome, firefox] # 👈 Matrix will launch 2 parallel runners!
 
     steps:
       - name: 1. Checkout repository code
@@ -26,12 +28,12 @@ jobs:
           distribution: 'temurin'
           cache: maven
 
-      - name: 3. Run TestNG Suite via Maven
-        run: mvn clean test -DsuiteXmlFile=testng.xml
+      - name: 3. Run TestNG Suite on ${{ matrix.browser }}
+        run: mvn clean test -DsuiteXmlFile=testng.xml -Dbrowser=${{ matrix.browser }}
 
-      - name: 4. Upload Extent HTML Report Artifact
-        if: always() # Always upload report, even if tests fail
+      - name: 4. Upload Extent HTML Report Artifact for ${{ matrix.browser }}
+        if: always()
         uses: actions/upload-artifact@v4
         with:
-          name: extent-test-report
+          name: extent-report-${{ matrix.browser }}
           path: reports/ExtentReport.html
